@@ -30,7 +30,7 @@ function CrossmintEmbeddedCheckoutWrapper() {
     return (
         <CrossmintEmbeddedCheckout_Alpha
             lineItems={{
-                collectionLocator: "crossmint:464ba7b5-77f0-4a73-903b-947c9d910d97",
+                collectionLocator: `crossmint:${process.env.NEXT_PUBLIC_CROSSMINT_COLLECTION_ID}`,
             }}
             payment={{
                 crypto: {
