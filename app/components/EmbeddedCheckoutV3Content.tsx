@@ -1,6 +1,7 @@
 "use client";
 
 import { CrossmintEmbeddedCheckout_Alpha, useCrossmintCheckout } from "@crossmint/client-sdk-react-ui";
+import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 const USE_CUSTOM_RENDERING = false;
@@ -27,8 +28,24 @@ export function EmbeddedCheckoutV3Content() {
 }
 
 function CrossmintEmbeddedCheckoutWrapper() {
+    const searchParams = useSearchParams();
+
+    const recipient = searchParams.get("recipient");
+    const appearance = searchParams.get("appearance");
+
+    let parsedRecipient: Parameters<typeof CrossmintEmbeddedCheckout_Alpha>[0]["recipient"] | undefined;
+    let parsedAppearance: Parameters<typeof CrossmintEmbeddedCheckout_Alpha>[0]["appearance"] | undefined;
+    if (recipient) {
+        parsedRecipient = JSON.parse(recipient as string)
+    }
+    if (appearance) {
+        parsedAppearance = JSON.parse(appearance as string)
+    }
+
     return (
         <CrossmintEmbeddedCheckout_Alpha
+            recipient={parsedRecipient}
+            appearance={parsedAppearance}
             lineItems={{
                 collectionLocator: `crossmint:${process.env.NEXT_PUBLIC_CROSSMINT_COLLECTION_ID}`,
             }}
