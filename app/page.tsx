@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { EmbeddedCheckoutV3ClientProviders } from "./components/EmbeddedCheckoutV3ClientProviders";
 import { EmbeddedCheckoutV3Content } from "./components/EmbeddedCheckoutV3Content";
 
@@ -23,7 +24,9 @@ export default function EmbeddedCheckoutV3Page() {
                 }}
             >
                 <EmbeddedCheckoutV3ClientProviders>
+                    <Suspense fallback={<div>Loading...</div>}>
                     <EmbeddedCheckoutV3Content />
+                    </Suspense>
                 </EmbeddedCheckoutV3ClientProviders>
             </div>
         </div>

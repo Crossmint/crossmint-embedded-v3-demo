@@ -50,6 +50,7 @@ function CrossmintEmbeddedCheckoutWrapper() {
                 collectionLocator: `crossmint:${process.env.NEXT_PUBLIC_CROSSMINT_COLLECTION_ID}`,
             }}
             payment={{
+                receiptEmail: searchParams.get("receiptEmail") || undefined,
                 crypto: {
                     enabled: true,
                 },
